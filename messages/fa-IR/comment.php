@@ -1,0 +1,22 @@
+<?php
+return [
+    'ID' => 'شناسه',
+	'View Time' => 'زمان بازدید',
+	'User ID' => 'کاربر',
+	'Item ID' => 'آیتم',
+	'Stat ID' => 'شناسه آمار',
+	'Statistics' => 'آمار',
+	'Module' => 'ماژول',
+	'Controller' => 'کنترلر',
+	'Action' => 'اکشن',
+	'IP Address' => 'آدرس IP',
+	'Creation Time' => 'زمان ایجاد',
+	'Status' => 'وضعیت',
+    'please enter your name' => 'نام خود را وارد کنید',
+    'please enter your subject' => 'موضوع را وارد کنید',
+    'please enter your Email' => 'ایمیل خود را وارد کنید',
+    'please enter your message' => 'پیام خود را وارد کنید',
+    'Thank you, Your message was sent' => 'پیام شما با موفقیت ارسال شد.',
+    'There is a problem on server, please come back later.' => 'مشکلی برای سرور پیش آمده است لطفا چند دقیقه بعد دوباره تلاش کنید.',
+    'Server problem' => 'سرور مشکل دارد.',
+];
