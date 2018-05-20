@@ -4,12 +4,12 @@ Installation Steps:
 ===
 
 1) run
-> php composer.phar require elephantsgroup/yii2-comment "*"
+> php composer.phar require elephantsgroup/eg-comment "*"
 
-or add `"elephantsgroup/yii2-comment": "*"` to the require section of your composer.json file.
+or add `"elephantsgroup/eg-comment": "*"` to the require section of your composer.json file.
 
 2) migrate database
-> yii migrate --migratiocommentnPath=vendor/elephantsgroup/yii2-comment/migrations
+> yii migrate --migratiocommentnPath=vendor/elephantsgroup/eg-comment/migrations
 
 3) add comment module to common configuration (common/config.php file)
 

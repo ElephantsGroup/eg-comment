@@ -17,7 +17,7 @@ $module_comment = \Yii::$app->getModule('comment');
 					<?php endforeach;?>
 				</ul>
 				<div id="reply-form<?= $com['id']?>"></div>
-				<a class="fa fa-comments" aria-hidden="true" onclick="show_form(<?= $com['id']?>)"></a>
+				<a class="fas fa-comments" aria-hidden="true" onclick="show_form(<?= $com['id']?>)"></a>
 			</li>
 		<?php endforeach;?>
 		</ul>
