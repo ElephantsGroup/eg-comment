@@ -13,6 +13,7 @@ class Comments extends Widget
 	public $language;
     public $service;
     public $item;
+    public $item_version;
     public $enabled_name = true;
     public $enabled_subject = true;
     public $enabled_description = true;
@@ -31,6 +32,7 @@ class Comments extends Widget
 	{
         return $this->render($this->view_file, [
             'item' => $this->item,
+            'item_version' => $this->item_version,
             'service' => $this->service,
             'enabled_name' => $this->enabled_name,
             'enabled_subject' => $this->enabled_subject,

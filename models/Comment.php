@@ -10,6 +10,7 @@ use Yii;
  * @property integer $id
  * @property string $ip
  * @property integer $item_id
+ * @property integer $item_version
  * @property integer $service_id
  * @property integer $user_id
  * @property string $email
@@ -47,7 +48,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['ip', 'email', 'subject', 'description'], 'trim'],
-            [['user_id', 'item_id', 'service_id', 'level', 'comment_id', 'status'], 'integer'],
+            [['user_id', 'item_id', 'item_version', 'service_id', 'level', 'comment_id', 'status'], 'integer'],
             [['email'], 'required'],
             [['email'], 'email'],
             [['description'], 'string'],
@@ -55,6 +56,7 @@ class Comment extends \yii\db\ActiveRecord
             [['ip'], 'string', 'max' => 32],
             [['email', 'subject'], 'string', 'max' => 128],
             [['status'], 'default', 'value' => self::$_STATUS_DISABLED],
+            [['item_version'], 'default', 'value' => 0],
             [['update_time'], 'default', 'value' => (new \DateTime)->setTimestamp(time())->setTimezone(new \DateTimeZone('Iran'))->format('Y-m-d H:i:s')],
             [['creation_time'], 'default', 'value' => (new \DateTime)->setTimestamp(time())->setTimezone(new \DateTimeZone('Iran'))->format('Y-m-d H:i:s')],
             [['status'], 'in', 'range' => array_keys(self::getStatus())],
@@ -71,6 +73,7 @@ class Comment extends \yii\db\ActiveRecord
             'id' => $base_module::t('ID'),
             'ip' => $base_module::t('IP'),
             'item_id' => $base_module::t('Item ID'),
+            'item_version' => $base_module::t('Item Version'),
             'service_id' => $base_module::t('Service ID'),
             'comment_id' => $base_module::t('Comment ID'),
             'level' => $base_module::t('Level'),
@@ -94,7 +97,7 @@ class Comment extends \yii\db\ActiveRecord
             $this->creation_time = $date->format('Y-m-d H:i:s');
         return parent::beforeSave($insert);
     }
-    
+
     /**
      * @inheritdoc
      * @return \common\models\CommentQuery the active query used by this AR class.

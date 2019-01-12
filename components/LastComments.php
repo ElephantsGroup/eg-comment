@@ -30,7 +30,7 @@ class LastComments extends Widget
 
     public function run()
 	{
-	    $last_comment = Comment::find()->where(['status' => Comment::$_STATUS_ENABLED, 'item_id' => $this->item, 'service_id' => $this->service ])->all();
+	    $last_comment = Comment::find()->where(['status' => Comment::$_STATUS_ENABLED, 'item_id' => $this->item, 'service_id' => $this->service ])->orderBy(['creation_time' => SORT_DESC])->all();
 
         $this->_comments = [
             'items' => []

@@ -62,6 +62,7 @@ var post_comment = function () {
 			email: $('#email').val(),
 			<?php if ($enabled_description) echo 'description: $(\'#message\').val(),'?>
 			<?php if ($item) echo 'item_id:' . $item .','?>
+			<?php if ($item_version) echo 'item_version:' . $item_version .','?>
 			<?php if ($service) echo 'service_id:' . $service .','?>
 			<?= Yii::$app->request->csrfParam; ?>:"<?= Yii::$app->request->csrfToken; ?>"
 		}

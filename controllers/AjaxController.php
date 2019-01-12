@@ -54,6 +54,7 @@ class AjaxController extends EGController
                 if(isset($_POST['subject'])) $model->subject = $_POST['subject'];
                 if(isset($_POST['description'])) $model->description = $_POST['description'];
                 if(isset($_POST['item_id'])) $model->item_id = $_POST['item_id'];
+                if(isset($_POST['item_version'])) $model->item_version = $_POST['item_version'];
                 if(isset($_POST['service_id'])) $model->service_id = $_POST['service_id'];
                 $model->user_id = (int) Yii::$app->user->id;
                 $model->ip = Yii::$app->request->userIP;
