@@ -12,7 +12,7 @@ $module_comment = \Yii::$app->getModule('comment');
 			<li style="border: groove; list-style-type: none;">
 				<div><?= $com['name'] ?>: <?= $com['description'] ?></div>
 				<ul style="list-style-type: none;">
-					<?php foreach ($com['childs'] as $child_id => $child_com):?>
+					<?php foreach ($com['children'] as $child_id => $child_com):?>
 						<li> <?= $child_com['name'] ?>: <?= $child_com['description'] ?></li>
 					<?php endforeach;?>
 				</ul>
@@ -90,6 +90,7 @@ $module_comment = \Yii::$app->getModule('comment');
 				email: $('#reply-email').val(),
 				<?php if ($enabled_description) echo 'description: $(\'#reply-message\').val(),'?>
 				<?php if ($item) echo 'item_id:' . $item .','?>
+				<?php if ($item_version) echo 'item_version:' . $item_version .','?>
 				<?php if ($service) echo 'service_id:' . $service .','?>
 				comment_id: global_comment_id ,
 				<?= Yii::$app->request->csrfParam; ?>:"<?= Yii::$app->request->csrfToken; ?>"
