@@ -9,15 +9,15 @@ $module_comment = \Yii::$app->getModule('comment');
 	<div>
 		<ul>
 		<?php foreach ($last_comment['items'] as $id => $com):?>
-			<li style="border: groove; list-style-type: none;">
-				<div><?= $com['name'] ?>: <?= $com['description'] ?></div>
-				<ul style="list-style-type: none;">
+			<li style="list-style-type: none; background-color: #f7f7f7; margin-bottom: 16px; padding: 16px; border-right: 3px solid rgb(138, 184, 194);">
+				<a style="float: left; cursor: pointer" aria-hidden="true" onclick="show_form(<?= $com['id']?>)">پاسخ دهید</a>
+				<div style="margin-bottom: 16px;"><strong><?= $com['name'] ?></strong>: <?= $com['description'] ?></div>
+				<ul style="list-style-type: none; margin-bottom: 16px;">
 					<?php foreach ($com['children'] as $child_id => $child_com):?>
-						<li> <?= $child_com['name'] ?>: <?= $child_com['description'] ?></li>
+						<li style="padding: 16px; border-right: 3px solid rgb(138, 184, 194);"> <strong><?= $child_com['name'] ?></strong>: <?= $child_com['description'] ?></li>
 					<?php endforeach;?>
 				</ul>
 				<div id="reply-form<?= $com['id']?>"></div>
-				<a class="fas fa-comments" aria-hidden="true" onclick="show_form(<?= $com['id']?>)"></a>
 			</li>
 		<?php endforeach;?>
 		</ul>

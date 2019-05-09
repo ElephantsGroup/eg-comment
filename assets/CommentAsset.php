@@ -33,6 +33,6 @@ class CommentAsset extends AssetBundle
 	];
     public $depends = [
         'yii\web\JqueryAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
+        // 'yii\bootstrap\BootstrapPluginAsset',
     ];
 }
