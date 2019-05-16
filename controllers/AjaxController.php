@@ -144,13 +144,13 @@ class AjaxController extends EGController
     {
         $module = \Yii::$app->getModule('comment');
 
-        if( $module->_required_name &&(!isset($_POST['name']) || empty($data['name'])))
+        if( $module->required_name &&(!isset($_POST['name']) || empty($data['name'])))
             $this->message[]= $module::t('Please enter name');
-        if( $module->_required_subject &&(!isset($_POST['subject']) || empty($data['subject'])))
+        if( $module->required_subject &&(!isset($_POST['subject']) || empty($data['subject'])))
             $this->message[]= $module::t('Please enter subject');
-        if( $module->_required_email &&(!isset($_POST['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)))
+        if( $module->required_email &&(!isset($_POST['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)))
             $this->message[]= $module::t('Please enter correct email');
-        if( $module->_required_message &&(!isset($_POST['description']) || empty($data['description'])))
+        if( $module->required_message &&(!isset($_POST['description']) || empty($data['description'])))
             $this->message[]= $module::t('Please enter message');
     }
 }

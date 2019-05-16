@@ -10,7 +10,7 @@ $module_comment = \Yii::$app->getModule('comment');
 		<ul>
 		<?php foreach ($last_comment['items'] as $id => $com):?>
 			<li style="list-style-type: none; background-color: #f7f7f7; margin-bottom: 16px; padding: 16px; border-right: 3px solid rgb(138, 184, 194);">
-				<a style="float: left; cursor: pointer" aria-hidden="true" onclick="show_form(<?= $com['id']?>)">پاسخ دهید</a>
+				<a style="float: left; cursor: pointer" aria-hidden="true" onclick="toggle_form(<?= $com['id']?>)">پاسخ دهید</a>
 				<div style="margin-bottom: 16px;"><strong><?= $com['name'] ?></strong>: <?= $com['description'] ?></div>
 				<ul style="list-style-type: none; margin-bottom: 16px;">
 					<?php foreach ($com['children'] as $child_id => $child_com):?>
@@ -31,39 +31,49 @@ $module_comment = \Yii::$app->getModule('comment');
 	var gloabl_comment_id = 0;
 	$reply_form_string =
 		'<div class="submit-review">'+
-		'<?php if($enabled_name) echo '<p><input class="form-control" type="text" name="reply-name" id="reply-name" placeholder="' . $module::t('Name') . '" /></p>'; ?>'+
-		'<?php if($enabled_subject) echo '<p><input class="form-control" type="text" name="reply-subject" id="reply-subject" placeholder="' .  $module::t('Subject') . '" /></p>'; ?>'+
-		'<p><input class="form-control" type="email" name="reply-email" id="reply-email" placeholder="<?= $module::t('Email') ?>" /></p>'+
-		'<?php if($enabled_description) echo '<p><textarea class="form-control" name="reply-message" id="reply-message" placeholder="' . $module::t('Message') .'"></textarea></textarea></p>'; ?>'+
-		'<input class="form-control" type="button" value="<?= $module::t('Send') ?>" onclick="post_reply()" />'+
+		'<?php if($enabled_name) echo '<p><input class="form-control" type="text" name="reply-name[[com_id]]" id="reply-name[[com_id]]" placeholder="' . $module::t('Name') . '" /></p>'; ?>'+
+		'<?php if($enabled_subject) echo '<p><input class="form-control" type="text" name="reply-subject[[com_id]]" id="reply-subject[[com_id]]" placeholder="' .  $module::t('Subject') . '" /></p>'; ?>'+
+		'<p><input class="form-control" type="email" name="reply-email[[com_id]]" id="reply-email[[com_id]]" placeholder="<?= $module::t('Email') ?>" /></p>'+
+		'<?php if($enabled_description) echo '<p><textarea class="form-control" name="reply-message[[com_id]]" id="reply-message[[com_id]]" placeholder="' . $module::t('Message') .'"></textarea></textarea></p>'; ?>'+
+		'<input class="form-control" type="button" value="<?= $module::t('Send') ?>" onclick="post_reply([[com_id]])" />'+
 		'</div>';
 
-	function show_form(com_id) {
-		//console.log($("#reply-form" + com_id));
-		$("#reply-form" + com_id).html($reply_form_string);
-		global_comment_id = com_id;
+	function escapeRegExp(str) {
+	    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 	}
-	var reply_validation = function () {
+	function replaceAll(str, find, replace) {
+	    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+	}
+
+	function toggle_form(com_id) {
+		//console.log($("#reply-form" + com_id));
+		if($("#reply-form" + com_id).html() == "")
+			$("#reply-form" + com_id).html(replaceAll($reply_form_string, '[[com_id]]', com_id));
+		else
+			$("#reply-form" + com_id).html("");
+		//global_comment_id = com_id;
+	}
+	var reply_validation = function (com_id) {
 		var message_validate = [];
-		if(<?= ($module_comment->_required_name) ? 'true' : 'false'?> && !($('#reply-name').val()))
+		if(<?= ($module_comment->required_name) ? 'true' : 'false'?> && !($('#reply-name' + com_id).val()))
 		{
 			//console.log('please entar your name');
 			message_validate.push("<?= $module_comment::t('please enter your name') ?>");
 		}
 
-		if(<?= ($module_comment->_required_subject) ? 'true' : 'false' ?> && !($('#reply-subject').val()))
+		if(<?= ($module_comment->required_subject) ? 'true' : 'false' ?> && !($('#reply-subject' + com_id).val()))
 		{
-			//console.log('please entar your subject');
+			console.log($('#reply-subject' + com_id).val());
 			message_validate.push("<?= $module_comment::t('please enter your subject') ?>");
 		}
 
-		if(<?= ($module_comment->_required_email) ? 'true' : 'false'?> && !($('#reply-email').val()))
+		if(<?= ($module_comment->required_email) ? 'true' : 'false'?> && !($('#reply-email' + com_id).val()))
 		{
 			//console.log('please entar your email');
 			message_validate.push("<?= $module_comment::t('please enter your Email')?>");
 		}
 
-		if(<?= ($module_comment->_required_message) ? 'true' : 'false'?> && !($('#reply-message').val()))
+		if(<?= ($module_comment->required_message) ? 'true' : 'false'?> && !($('#reply-message' + com_id).val()))
 		{
 			//console.log('please entar your message');
 			message_validate.push("<?= $module_comment::t('please enter your message')?>");
@@ -75,8 +85,8 @@ $module_comment = \Yii::$app->getModule('comment');
 		return message_validate;
 
 	};
-	var post_reply = function () {
-		var messages = reply_validation();
+	var post_reply = function (com_id) {
+		var messages = reply_validation(com_id);
 		console.log(messages);
 		if(messages.length > 0)
 			return;
@@ -85,14 +95,14 @@ $module_comment = \Yii::$app->getModule('comment');
 			url: "<?= Yii::getAlias('@web') ?>/comment/ajax/reply",
 			method: "POST",
 			data: {
-				<?php if ($enabled_name) echo 'name: $(\'#reply-name\').val(),'?>
-				<?php if ($enabled_subject) echo 'subject: $(\'#reply-subject\').val(),'?>
-				email: $('#reply-email').val(),
-				<?php if ($enabled_description) echo 'description: $(\'#reply-message\').val(),'?>
+				<?php if ($enabled_name) echo 'name: $(\'#reply-name\'+com_id).val(),'?>
+				<?php if ($enabled_subject) echo 'subject: $(\'#reply-subject\'+com_id).val(),'?>
+				email: $('#reply-email'+com_id).val(),
+				<?php if ($enabled_description) echo 'description: $(\'#reply-message\'+com_id).val(),'?>
 				<?php if ($item) echo 'item_id:' . $item .','?>
 				<?php if ($item_version) echo 'item_version:' . $item_version .','?>
 				<?php if ($service) echo 'service_id:' . $service .','?>
-				comment_id: global_comment_id ,
+				comment_id: com_id,
 				<?= Yii::$app->request->csrfParam; ?>:"<?= Yii::$app->request->csrfToken; ?>"
 			}
 		})

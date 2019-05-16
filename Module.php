@@ -17,10 +17,12 @@ class Module extends \yii\base\Module
     // make a problem, when is not logged and request like url, it asks for username and passwrod, then
     // visitor know this action exists but not allowed
     // TODO: try to solve this problem
-    public $_required_name = true;
-    public $_required_subject = false;
-    public $_required_email = true;
-    public $_required_message = true;
+    public $required_name = true;
+    public $required_subject = false;
+    public $required_email = true;
+    public $required_message = true;
+    public $last_comment = [];
+    public $comments = [];
 
     public function init()
     {

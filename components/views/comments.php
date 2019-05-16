@@ -18,25 +18,25 @@ $module_comment = \Yii::$app->getModule('comment');
 <script>
 var comment_validation = function () {
 	var message_validate = [];
-	if(<?= ($module_comment->_required_name) ? 'true' : 'false'?> && !($('#name').val()))
+	if(<?= ($module_comment->required_name) ? 'true' : 'false'?> && !($('#name').val()))
 	{
 		//console.log('please entar your name');
 		message_validate.push("<?= $module_comment::t('please enter your name') ?>");
 	}
 
-	if(<?= ($module_comment->_required_subject) ? 'true' : 'false' ?> && !($('#subject').val()))
+	if(<?= ($module_comment->required_subject) ? 'true' : 'false' ?> && !($('#subject').val()))
 	{
 		//console.log('please entar your subject');
 		message_validate.push("<?= $module_comment::t('please enter your subject') ?>");
 	}
 
-	if(<?= ($module_comment->_required_email) ? 'true' : 'false'?> && !($('#email').val()))
+	if(<?= ($module_comment->required_email) ? 'true' : 'false'?> && !($('#email').val()))
 	{
 		//console.log('please entar your email');
 		message_validate.push("<?= $module_comment::t('please enter your Email') ?>");
 	}
 
-	if(<?= ($module_comment->_required_message) ? 'true' : 'false'?> && !($('#message').val()))
+	if(<?= ($module_comment->required_message) ? 'true' : 'false'?> && !($('#message').val()))
 	{
 		//console.log('please entar your message');
 		message_validate.push("<?= $module_comment::t('please enter your message') ?>");

@@ -22,10 +22,18 @@ class Comments extends Widget
 
 	public function init()
 	{
+		$module = \Yii::$app->getModule('comment');
+
 		if(!isset($this->language) || !$this->language)
 			$this->language = Yii::$app->language;
         if(!isset($this->view_file) || !$this->view_file)
             $this->view_file = Yii::t('comment', 'View File');
+		if(isset($module->comments['enabled_name']))
+			$this->enabled_name = $module->comments['enabled_name'];
+		if(isset($module->comments['enabled_subject']))
+			$this->enabled_subject = $module->comments['enabled_subject'];
+		if(isset($module->comments['enabled_description']))
+			$this->enabled_description = $module->comments['enabled_description'];
 	}
 
     public function run()
