@@ -21,25 +21,25 @@ var comment_validation = function () {
 	if(<?= ($module_comment->required_name) ? 'true' : 'false'?> && !($('#name').val()))
 	{
 		//console.log('please entar your name');
-		message_validate.push("<?= $module_comment::t('please enter your name') ?>");
+		message_validate.push("<?= $module_comment::t('comment', 'please enter your name') ?>");
 	}
 
 	if(<?= ($module_comment->required_subject) ? 'true' : 'false' ?> && !($('#subject').val()))
 	{
 		//console.log('please entar your subject');
-		message_validate.push("<?= $module_comment::t('please enter your subject') ?>");
+		message_validate.push("<?= $module_comment::t('comment', 'please enter your subject') ?>");
 	}
 
 	if(<?= ($module_comment->required_email) ? 'true' : 'false'?> && !($('#email').val()))
 	{
 		//console.log('please entar your email');
-		message_validate.push("<?= $module_comment::t('please enter your Email') ?>");
+		message_validate.push("<?= $module_comment::t('comment', 'please enter your Email') ?>");
 	}
 
 	if(<?= ($module_comment->required_message) ? 'true' : 'false'?> && !($('#message').val()))
 	{
 		//console.log('please entar your message');
-		message_validate.push("<?= $module_comment::t('please enter your message') ?>");
+		message_validate.push("<?= $module_comment::t('comment', 'please enter your message') ?>");
 	}
 
 	if (message_validate.length > 0)

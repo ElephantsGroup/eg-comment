@@ -19,4 +19,5 @@ return [
     'Thank you, Your message was sent' => 'پیام شما با موفقیت ارسال شد.',
     'There is a problem on server, please come back later.' => 'مشکلی برای سرور پیش آمده است لطفا چند دقیقه بعد دوباره تلاش کنید.',
     'Server problem' => 'سرور مشکل دارد.',
+    '' => '',
 ];

@@ -58,25 +58,25 @@ $module_comment = \Yii::$app->getModule('comment');
 		if(<?= ($module_comment->required_name) ? 'true' : 'false'?> && !($('#reply-name' + com_id).val()))
 		{
 			//console.log('please entar your name');
-			message_validate.push("<?= $module_comment::t('please enter your name') ?>");
+			message_validate.push("<?= $module_comment::t('comment', 'please enter your name') ?>");
 		}
 
 		if(<?= ($module_comment->required_subject) ? 'true' : 'false' ?> && !($('#reply-subject' + com_id).val()))
 		{
 			console.log($('#reply-subject' + com_id).val());
-			message_validate.push("<?= $module_comment::t('please enter your subject') ?>");
+			message_validate.push("<?= $module_comment::t('comment', 'please enter your subject') ?>");
 		}
 
 		if(<?= ($module_comment->required_email) ? 'true' : 'false'?> && !($('#reply-email' + com_id).val()))
 		{
 			//console.log('please entar your email');
-			message_validate.push("<?= $module_comment::t('please enter your Email')?>");
+			message_validate.push("<?= $module_comment::t('comment', 'please enter your Email')?>");
 		}
 
 		if(<?= ($module_comment->required_message) ? 'true' : 'false'?> && !($('#reply-message' + com_id).val()))
 		{
 			//console.log('please entar your message');
-			message_validate.push("<?= $module_comment::t('please enter your message')?>");
+			message_validate.push("<?= $module_comment::t('comment', 'please enter your message')?>");
 		}
 
 		if (message_validate.length > 0)

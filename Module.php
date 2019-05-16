@@ -39,8 +39,8 @@ class Module extends \yii\base\Module
         }
     }
 
-    public static function t($message, $params = [], $language = null)
+    public static function t($category, $message, $params = [], $language = null)
     {
-        return \Yii::t('comment', $message, $params, $language);
+        return \Yii::t($category, $message, $params, $language);
     }
 }

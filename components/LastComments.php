@@ -43,11 +43,11 @@ class LastComments extends Widget
 
 	public function run()
 	{
-		$last_comment = Comment::find()->where(['status' => Comment::$_STATUS_ENABLED, 'item_id' => $this->item, 'service_id' => $this->service ])->orderBy(['creation_time' => SORT_DESC])->all();
+		$last_comment = Comment::find()->where(['status' => Comment::$_STATUS_CONFIRMED, 'item_id' => $this->item, 'service_id' => $this->service ])->orderBy(['creation_time' => SORT_DESC])->all();
 
 		$parent_comment = Comment::find()
 							->select('id')
-							->where(['status' => Comment::$_STATUS_ENABLED, 'item_id' => $this->item, 'service_id' => $this->service, 'level' => 0 ])
+							->where(['status' => Comment::$_STATUS_CONFIRMED, 'item_id' => $this->item, 'service_id' => $this->service, 'level' => 0 ])
 							->orderBy(['creation_time' => SORT_DESC])
 							->limit($this->number)
 							->asArray()

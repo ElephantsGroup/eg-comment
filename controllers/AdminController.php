@@ -21,14 +21,14 @@ class AdminController extends EGController
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        $behaviors = [];
+        // $behaviors['verbs'] = [
+        //     'class' => VerbFilter::className(),
+        //     'actions' => [
+        //         'delete' => ['post'],
+        //     ],
+        // ];
+        return $behaviors;
     }
 
     /**
@@ -93,6 +93,140 @@ class AdminController extends EGController
         return $this->redirect(['index']);
     }
 
+    public function actionConfirm($id, $redirectUrl)
+    {
+       $comment_module = Yii::$app->getModule('comment');
+       $response = [
+               'status' => 500,
+               'message' => $comment_module::t('comment', 'Server problem')
+           ];
+           try
+           {
+               $comment = $this->findModel($id);
+               if (!$comment)
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'Comment Not Found.')
+                   ];
+               }
+
+               if ($comment->confirm())
+               {
+                   $response = [
+                       'status' => 200,
+                       'message' => $comment_module::t('comment', 'Successful')
+                   ];
+               }
+               else
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'cant set to confirm')
+                   ];
+               }
+           }
+           catch (Exception $exp)
+           {
+               $response = [
+                   'status' => 500,
+                   'message' => $comment_module::t('comment', $exp)
+               ];
+           }
+       return $this->redirect($redirectUrl);
+     }
+
+     public function actionDeny($id, $redirectUrl)
+     {
+       $comment_module = Yii::$app->getModule('comment');
+       $response = [
+               'status' => 500,
+               'message' => $comment_module::t('comment', 'Server problem')
+           ];
+           try
+           {
+               $comment = $this->findModel($id);
+               if (!$comment)
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'Comment Not Found.')
+                   ];
+               }
+
+               if ($comment->deny())
+               {
+                   //var_dump($id); die;
+                   $response = [
+                       'status' => 200,
+                       'message' => $comment_module::t('comment', 'Successful')
+                   ];
+               }
+               else
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'cant set to deny')
+                   ];
+               }
+           }
+           catch (Exception $exp)
+           {
+               $response = [
+                   'status' => 500,
+                   'message' => $comment_module::t('comment', $exp)
+               ];
+           }
+
+           //return json_encode($response);
+           return $this->redirect($redirectUrl);
+     }
+
+       public function actionArchive($id, $redirectUrl)
+       {
+           $comment_module = Yii::$app->getModule('comment');
+           $response = [
+               'status' => 500,
+               'message' => $comment_module::t('comment', 'Server problem')
+           ];
+           try
+           {
+               $comment = $this->findModel($id);
+               if (!$comment)
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'Comment Not Found.')
+                   ];
+               }
+
+               if ($comment->archive())
+               {
+                   //var_dump($id); die;
+                   $response = [
+                       'status' => 200,
+                       'message' => $comment_module::t('comment', 'Successful')
+                   ];
+               }
+               else
+               {
+                   $response = [
+                       'status' => 500,
+                       'message' => $comment_module::t('comment', 'cant set to archive')
+                   ];
+               }
+           }
+           catch (Exception $exp)
+           {
+               $response = [
+                   'status' => 500,
+                   'message' => $comment_module::t('comment', $exp)
+               ];
+           }
+
+           //return json_encode($response);
+           return $this->redirect($redirectUrl);
+       }
     /**
      * Finds the Comment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
