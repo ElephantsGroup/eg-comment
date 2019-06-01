@@ -14,10 +14,11 @@
             "email": "a_majd_8@yahoo.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "*",
-        "elephantsgroup/eg-base": "~1",
-        "elephantsgroup/eg-jdf": "~1"
+        "elephantsgroup/eg-base": "dev-master",
+        "elephantsgroup/eg-jdf": "dev-master"
     },
     "config": {
         "process-timeout": 1500,
