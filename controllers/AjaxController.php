@@ -34,7 +34,7 @@ class AjaxController extends EGController
         $comment_module = Yii::$app->getModule('comment');
         $response = [
             'status' => 500,
-            'message' => $comment_module::t('Server problem')
+            'message' => $comment_module::t('comment', 'Server problem')
         ];
 
         try
@@ -62,12 +62,12 @@ class AjaxController extends EGController
                 if($model->save())
                     $response = [
                         'status' => 200,
-                        'message' => $comment_module::t('Thank you, Your message was sent')
+                        'message' => $comment_module::t('comment','Thank you, Your message was sent')
                     ];
                 else
                     $response = [
                         'status' => 400,
-                        'message' => $comment_module::t('There is a problem on server, please come back later.')
+                        'message' => $comment_module::t('comment','There is a problem on server, please come back later.')
                     ];
             }
         }
@@ -75,7 +75,7 @@ class AjaxController extends EGController
         {
             $response = [
                 'status' => 500,
-                'message' => $comment_module::t('Server problem')
+                'message' => $comment_module::t('comment','Server problem')
             ];
         }
         return json_encode($response);
@@ -86,7 +86,7 @@ class AjaxController extends EGController
         $comment_module = Yii::$app->getModule('comment');
         $response = [
             'status' => 500,
-            'message' => $comment_module::t('Server problem')
+            'message' => $comment_module::t('comment','Server problem')
         ];
 
         try
@@ -120,13 +120,13 @@ class AjaxController extends EGController
                 if($model->save())
                     $response = [
                         'status' => 200,
-                        'message' => $comment_module::t('Thank you, Your message was sent'),
+                        'message' => $comment_module::t('comment','Thank you, Your message was sent'),
                         'comment_id' => $_POST['comment_id']
                     ];
                 else
                     $response = [
                         'status' => 400,
-                        'message' => $comment_module::t('There is a problem on server, please come back later.')
+                        'message' => $comment_module::t('comment','There is a problem on server, please come back later.')
                     ];
             }
         }
@@ -134,7 +134,7 @@ class AjaxController extends EGController
         {
             $response = [
                 'status' => 500,
-                'message' => $comment_module::t('Server problem')
+                'message' => $comment_module::t('comment','Server problem')
             ];
         }
         return json_encode($response);
