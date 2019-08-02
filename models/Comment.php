@@ -108,7 +108,7 @@ class Comment extends \yii\db\ActiveRecord
     public function getCanBeConfirmed()
     {
       return (($this->status == self::$_STATUS_CREATED || $this->status == self::$_STATUS_ARCHIVED || $this->status == self::$_STATUS_DENIED)
-        && Yii::$app->user &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
+        && Yii::$app->user->id &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
       );
     }
 
@@ -125,7 +125,7 @@ class Comment extends \yii\db\ActiveRecord
     public function getCanBeDenied()
     {
       return (($this->status == self::$_STATUS_CREATED || $this->status == self::$_STATUS_CONFIRMED || $this->status == self::$_STATUS_ARCHIVED)
-        && Yii::$app->user &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
+        && Yii::$app->user->id &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
       );
     }
 
@@ -142,7 +142,7 @@ class Comment extends \yii\db\ActiveRecord
     public function getCanBeArchived()
     {
       return (($this->status == self::$_STATUS_CREATED || $this->status == self::$_STATUS_CONFIRMED || $this->status == self::$_STATUS_DENIED)
-        && Yii::$app->user &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
+        && Yii::$app->user->id &&(Yii::$app->user->identity->isAdmin || Yii::$app->user->id == $this->user_id)
       );
     }
 
