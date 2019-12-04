@@ -10,7 +10,7 @@ $module_comment = \Yii::$app->getModule('comment');
 		<ul>
 		<?php foreach ($last_comment['items'] as $id => $com):?>
 			<li style="list-style-type: none; background-color: #f7f7f7; margin-bottom: 16px; padding: 16px; border-right: 3px solid rgb(138, 184, 194);">
-				<a style="float: left; cursor: pointer" aria-hidden="true" onclick="toggle_form(<?= $com['id']?>)">پاسخ دهید</a>
+				<a style="float: left; cursor: pointer; background-color: #666; color: white; margin: 2px; padding: 5px; border-radius: 2px;" aria-hidden="true" onclick="toggle_form(<?= $com['id']?>)">پاسخ دهید</a>
 				<div style="margin-bottom: 16px;"><strong><?= $com['name'] ?></strong>: <?= $com['description'] ?></div>
 				<ul style="list-style-type: none; margin-bottom: 16px;">
 					<?php foreach ($com['children'] as $child_id => $child_com):?>
